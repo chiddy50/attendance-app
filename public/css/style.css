@@ -1,0 +1,113 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+html {
+  font-size: 62.5%; 
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #777; 
+  margin: 0;
+}
+
+div#wrapper{
+  height: 100%;
+  display: flex;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: -25rem;
+}
+
+.page-content{
+  min-width: 0;
+  width: 100%;
+}
+
+#menu-toggle{
+  cursor: pointer;
+}
+
+
+/* NAVBAR STYLING */
+.top-nav {
+  /* background-color: #F8F9FA; */
+  background-image: linear-gradient(
+        to right bottom, 
+        var(--color-primary-light), 
+        var(--color-primary-dark)
+    );
+  border-bottom: 1px solid #dee2e6;
+  overflow: hidden;
+}
+
+#menu-toggle, 
+.top-nav a,
+.top-nav p{
+  color: #fff;
+  padding: 1.6rem 1.6rem;
+  font-size: 1.7rem;
+}
+
+/* Style the links inside the navigation bar */
+.top-nav a,
+.top-nav p {
+  float: right;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Change the color of links on hover */
+.top-nav a:hover,
+.top-nav p:hover {
+  background-color: var(--color-primary-light);
+  color: #fff;
+  /* border-bottom: 2px solid #4CAF50; */
+}
+
+/* Add a color to the active/current link */
+.top-nav a.active,
+.top-nav p.active {
+  border-bottom: 2px solid var(--color-primary-light);
+  
+  background-color: var(--color-primary-light);
+  /* color: white; */
+}
+
+/* NAVBAR STYLING END */
+
+
+
+
+
+
+
+.test{
+  border: 1px dashed #000;
+}
+
+.header{
+  margin-top: 3rem;
+  padding: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
