@@ -12,14 +12,21 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+      // dd([$request->name, $request->email, $request->password, $request->admin, $request->user]);
+      
       $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => bcrypt($request->password),
       ]);
-        
-      $token = auth()->login($user);
+      if (isset($request->user)) {
+        $user->roles()->attach($request->user);  
+      }
+      if (isset($request->admin)) {
+        $user->roles()->attach($request->admin);  
+      }
 
+      $token = auth()->login($user);
       return $this->respondWithToken($token);
     }
 

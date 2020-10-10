@@ -1,6 +1,9 @@
 <template>
     <div class="row">
-        <div class="chartBtn-box">
+        <ul class="list__group" v-if="!$store.state.teamChartData.length">
+            <li>No Records in the database</li>
+        </ul>
+        <div class="chartBtn-box" v-if="$store.state.teamChartData.length">
             <button class="chartBtn" @click="selected = 'line'">Line</button> 
             <button class="chartBtn" @click="selected = 'pie'">Pie</button> 
             <button class="chartBtn" @click="selected = 'bar'">Column</button> 
@@ -14,6 +17,7 @@
         <div class="chart-box" v-if="selected === 'bar'">
             <bar-chart v-if="$store.state.teamChartData.length"></bar-chart>
         </div>
+
         
     </div>
 </template>

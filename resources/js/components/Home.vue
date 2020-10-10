@@ -15,19 +15,19 @@
           </div>
         </span> -->
         <span>
-          <router-link v-if="parseRole=='Admin' && loggedIn" tag="a" to="/add-staff" class="accordion">Add Staff</router-link>
+          <router-link v-if="isAdmin && loggedIn" tag="a" to="/add-staff" class="accordion">Add Staff</router-link>
         </span>  
         <span>
-          <router-link v-if="parseRole=='Admin' && loggedIn" tag="a" to="/add-staff" class="accordion">Add Staff</router-link>
+          <router-link v-if="isAdmin && loggedIn" tag="a" to="/add-staff" class="accordion">Add Staff</router-link>
         </span>      
         <span>
-          <router-link v-if="parseRole=='Admin' && loggedIn" tag="a" to="/check-records" class="accordion">Check Records</router-link>
+          <router-link v-if="isAdmin && loggedIn" tag="a" to="/check-records" class="accordion">Check Records</router-link>
         </span>     
         <span>
-          <router-link v-if="parseRole=='Admin' && loggedIn" tag="a" to="/teams" class="accordion">Teams</router-link>
+          <router-link v-if="isAdmin && loggedIn" tag="a" to="/teams" class="accordion">Teams</router-link>
         </span>
         <span>
-          <router-link v-if="parseRole=='Admin' && loggedIn" tag="a" to="/month" class="accordion">Add Month</router-link>
+          <router-link v-if="isAdmin && loggedIn" tag="a" to="/month" class="accordion">Add Month</router-link>
         </span>
         
         <!-- <span>
@@ -72,14 +72,9 @@ export default {
     },
     computed: {
       ...mapGetters(['role', 'loggedIn']),
-      parseRole(){
-        if (this.userRole.length > 1) {
-          return "Admin"
-        }else if (this.userRole.length === 1) {
-          return "User"
-        } else {
-          return null
-        }
+      isAdmin(){
+        let admin = this.userRole.some(role => { return role === 'admin' });
+        return admin ? true : false
       }
       
     },
