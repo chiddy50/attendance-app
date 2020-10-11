@@ -53,8 +53,10 @@
               />
         <label for="checkbox-2">User</label>
         
-
-        <button type="submit" class="button-submit btn-register">Register</button>
+        <button type="submit" 
+          :disabled="!email || !password || loading" 
+          class="button-submit btn-register" 
+          v-text="loading?'Please wait..':'Register'"></button>
       </form>
     </div>
   </div>
@@ -72,7 +74,8 @@ export default {
         password: null,
         confirm_password: null,
         admin: null,
-        user: null
+        user: null,
+        loading: false
       }
     },
     methods: {
@@ -87,6 +90,7 @@ export default {
           })
           return
         }
+        this.loading = true
         let self = this
         let formData = new FormData(e.target);
         // axios.post("api/register", {
@@ -107,6 +111,7 @@ export default {
 
         })
         .catch(err => console.error(err))
+        .finally(() => self.loading = false)
       }
     }
 }

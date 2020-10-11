@@ -2844,6 +2844,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2855,7 +2857,8 @@ __webpack_require__.r(__webpack_exports__);
       password: null,
       confirm_password: null,
       admin: null,
-      user: null
+      user: null,
+      loading: false
     };
   },
   methods: {
@@ -2871,6 +2874,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
+      this.loading = true;
       var self = this;
       var formData = new FormData(e.target); // axios.post("api/register", {
       //   name: this.name,
@@ -2889,6 +2893,8 @@ __webpack_require__.r(__webpack_exports__);
         window.location.reload();
       })["catch"](function (err) {
         return console.error(err);
+      })["finally"](function () {
+        return self.loading = false;
       });
     }
   }
@@ -45661,14 +45667,16 @@ var render = function() {
           _vm._v(" "),
           _c("label", { attrs: { for: "checkbox-2" } }, [_vm._v("User")]),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button-submit btn-register",
-              attrs: { type: "submit" }
+          _c("button", {
+            staticClass: "button-submit btn-register",
+            attrs: {
+              type: "submit",
+              disabled: !_vm.email || !_vm.password || _vm.loading
             },
-            [_vm._v("Register")]
-          )
+            domProps: {
+              textContent: _vm._s(_vm.loading ? "Please wait.." : "Register")
+            }
+          })
         ]
       )
     ])
