@@ -2826,26 +2826,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4011,7 +3991,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "p.other-links[data-v-6dde423b] {\n  margin: 0;\n  cursor: pointer;\n}\np.active[data-v-6dde423b] {\n  text-transform: uppercase;\n}\np.active span[data-v-6dde423b] {\n  text-transform: capitalize;\n}", ""]);
+exports.push([module.i, "p.other-links[data-v-6dde423b] {\n  margin: 0;\n  cursor: pointer;\n}\np.active[data-v-6dde423b] {\n  text-transform: uppercase;\n  position: relative;\n}\np.active span[data-v-6dde423b] {\n  text-transform: capitalize;\n}\nspan#roleText[data-v-6dde423b] {\n  position: absolute;\n  top: 3.6rem;\n  right: 2px;\n  font-size: 0.9rem;\n  background: #2c6296;\n  padding: 3px;\n  border-radius: 6px;\n}", ""]);
 
 // exports
 
@@ -45470,7 +45450,9 @@ var render = function() {
       _vm.loggedIn
         ? _c("p", { staticClass: "active", attrs: { to: "/" } }, [
             _vm._v(_vm._s(_vm.authUser)),
-            _c("span", [_vm._v("(" + _vm._s(_vm.role) + ")")])
+            _c("span", { attrs: { id: "roleText" } }, [
+              _vm._v(_vm._s(_vm.role))
+            ])
           ])
         : _vm._e(),
       _vm._v(" "),

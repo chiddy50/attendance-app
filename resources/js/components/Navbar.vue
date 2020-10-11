@@ -13,7 +13,7 @@
 
     <div class="top-nav">
         <i class="fas fa-bars" id="menu-toggle"></i>
-        <p class="active" v-if="loggedIn" to="/">{{ authUser }}<span>({{ role }})</span></p>
+        <p class="active" v-if="loggedIn" to="/">{{ authUser }}<span id="roleText">{{ role }}</span></p>
         <router-link to="/login" tag="a" v-if="!loggedIn">Login</router-link>
         <router-link to="/register" tag="a" v-if="!loggedIn">Register</router-link>
         <p @click="logout" v-if="loggedIn">Logout</p>
@@ -115,9 +115,20 @@ p.other-links {
 
 p.active {
     text-transform: uppercase;
+    position: relative;
 }
 
 p.active span {
     text-transform: capitalize;
+}
+
+span#roleText {
+    position: absolute;
+    top: 3.6rem;
+    right: 2px;
+    font-size: 0.9rem;
+    background: #2c6296;
+    padding: 3px;
+    border-radius: 6px;
 }
 </style>
