@@ -2228,7 +2228,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_2___default()(highcharts__
         },
         yAxis: {
           min: 0,
-          max: 300,
+          max: 40,
           title: {
             text: 'Population'
           }
@@ -2321,7 +2321,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_2___default()(highcharts__
         },
         yAxis: {
           min: 0,
-          max: 300,
+          max: 40,
           title: {
             text: 'Population'
           }

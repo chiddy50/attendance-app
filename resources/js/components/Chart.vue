@@ -54,7 +54,7 @@ export default {
             },
             yAxis: {
                 min: 0,
-                max: 300,
+                max: 40,
                 title: {
                     text: 'Population'
                 },
