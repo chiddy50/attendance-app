@@ -45235,9 +45235,9 @@ var render = function() {
                   "router-link",
                   {
                     staticClass: "accordion",
-                    attrs: { tag: "a", to: "/add-staff" }
+                    attrs: { tag: "a", to: "/attendance" }
                   },
-                  [_vm._v("Add Staff")]
+                  [_vm._v("Take Attendance")]
                 )
               : _vm._e()
           ],

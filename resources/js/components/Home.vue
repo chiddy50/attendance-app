@@ -15,7 +15,7 @@
           </div>
         </span> -->
         <span>
-          <router-link v-if="isAdmin && loggedIn" tag="a" to="/add-staff" class="accordion">Add Staff</router-link>
+          <router-link v-if="isAdmin && loggedIn" tag="a" to="/attendance" class="accordion">Take Attendance</router-link>
         </span>  
         <span>
           <router-link v-if="isAdmin && loggedIn" tag="a" to="/add-staff" class="accordion">Add Staff</router-link>
