@@ -73,6 +73,10 @@ Route::get('months', 'MonthController@index');
 Route::post('month', 'MonthController@store');
 
 
+// ROLE ROUTES
+Route::get('roles', 'RoleController@index');
+Route::post('role', 'RoleController@store');
+
 
 
 

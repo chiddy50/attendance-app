@@ -16,6 +16,7 @@ export const store = new Vuex.Store({
 
         staffs: [],
         teams: [],
+        roles: [],
         months: [],
         teamChartData: []
     },
@@ -64,6 +65,10 @@ export const store = new Vuex.Store({
 
         MUTATE_TEAMS(state, data){
             state.teams = data
+        },
+
+        MUTATE_ROLES(state, data){
+            state.roles = data
         },
 
         MUTATE_MONTHS(state, data){
@@ -135,6 +140,17 @@ export const store = new Vuex.Store({
             .then(response => {
                 // console.log(response);
                 commit('MUTATE_TEAMS', response.data.data)
+            })
+            .catch(err => {
+                console.error(err);
+            })
+        },
+
+        getRoles({ commit }){
+            axios.get("api/roles")
+            .then(response => {
+                // console.log(response);
+                commit('MUTATE_ROLES', response.data.data)
             })
             .catch(err => {
                 console.error(err);
