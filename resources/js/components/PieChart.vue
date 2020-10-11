@@ -46,7 +46,7 @@ export default {
                 text: 'Population of staffs per team'
             },
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                pointFormat: '{series.name}: <b>{point.y}</b>'
             },
             accessibility: {
                 point: {
@@ -64,7 +64,7 @@ export default {
                 }
             },
             series: [{
-                name: 'Teams',
+                name: 'Population',
                 colorByPoint: true,
                 data: data
             }]

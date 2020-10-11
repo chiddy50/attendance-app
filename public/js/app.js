@@ -2740,7 +2740,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_2___default()(highcharts__
           text: 'Population of staffs per team'
         },
         tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          pointFormat: '{series.name}: <b>{point.y}</b>'
         },
         accessibility: {
           point: {
@@ -2758,7 +2758,7 @@ highcharts_modules_exporting__WEBPACK_IMPORTED_MODULE_2___default()(highcharts__
           }
         },
         series: [{
-          name: 'Teams',
+          name: 'Population',
           colorByPoint: true,
           data: data
         }]
