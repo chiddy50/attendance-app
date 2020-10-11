@@ -2870,7 +2870,7 @@ __webpack_require__.r(__webpack_exports__);
       // })
 
       axios.post("api/register", formData).then(function (response) {
-        console.log(response);
+        // console.log(response);
         self.$router.push('/');
         var token = response.data.access_token;
         vue_cookies__WEBPACK_IMPORTED_MODULE_1___default.a.set('token', JSON.stringify(token));

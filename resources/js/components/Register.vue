@@ -96,7 +96,7 @@ export default {
         // })
         axios.post("api/register", formData)
         .then(response => {
-          console.log(response);
+          // console.log(response);
           self.$router.push('/')
           let token = response.data.access_token;
           VueCookies.set('token', JSON.stringify(token));
