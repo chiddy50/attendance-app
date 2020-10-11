@@ -45,8 +45,8 @@ const routes = [
     { 
         path: '/roles', 
         name: 'roles',
-        component: require('./views/Role.vue').default,
-        meta: { requiresAuth: true }
+        component: require('./views/Role.vue').default
+        // meta: { requiresAuth: true }
     },
     { 
         path: '/attendance', 

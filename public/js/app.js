@@ -64229,10 +64229,8 @@ var routes = [{
 }, {
   path: '/roles',
   name: 'roles',
-  component: __webpack_require__(/*! ./views/Role.vue */ "./resources/js/views/Role.vue")["default"],
-  meta: {
-    requiresAuth: true
-  }
+  component: __webpack_require__(/*! ./views/Role.vue */ "./resources/js/views/Role.vue")["default"] // meta: { requiresAuth: true }
+
 }, {
   path: '/attendance',
   name: 'attendance',
