@@ -4,9 +4,9 @@
             <li>No Records in the database</li>
         </ul>
         <div class="chartBtn-box" v-if="$store.state.teamChartData.length">
-            <button class="chartBtn" @click="selected = 'line'">Line</button> 
-            <button class="chartBtn" @click="selected = 'pie'">Pie</button> 
-            <button class="chartBtn" @click="selected = 'bar'">Column</button> 
+            <button class="chartBtn line" @click="selected = 'line'">Line Chart Analysis</button> 
+            <button class="chartBtn pie" @click="selected = 'pie'">Pie Chart Analysis</button> 
+            <button class="chartBtn bar" @click="selected = 'bar'">Column Chart Analysis</button> 
         </div>
         <div class="chart-box" v-if="selected === 'line'">
             <team-chart v-if="$store.state.teamChartData.length"></team-chart>
@@ -65,12 +65,24 @@ button.chartBtn:active
 {
     display: block;
     padding: 0.4rem 1.4rem;
-    background: #ba265d;
+    /* background: #ba265d; */
     color: #fff;
     border: none;
     margin: 0 0.1rem;
     cursor: pointer;
     outline: none;
+}
+
+.line{
+    background: #90ed7d;
+}
+
+.pie {
+    background: #f7a35c;
+}
+
+.bar {
+    background: #7cb5ec;
 }
 
 </style>

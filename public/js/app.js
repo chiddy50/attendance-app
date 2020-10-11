@@ -2517,17 +2517,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'login',
   data: function data() {
     return {
       email: null,
-      password: null
+      password: null,
+      loading: null
     };
   },
   methods: {
     login: function login() {
-      // console.log(this.$store);
+      this.loading = true; // console.log(this.$store);
+
       var self = this;
       var user = {
         email: self.email,
@@ -2541,6 +2548,8 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       })["catch"](function (err) {
         return console.error(err);
+      })["finally"](function () {
+        return self.loading = false;
       });
     }
   },
@@ -4148,7 +4157,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.chart-box[data-v-1f79daf6]{\r\n    width: 100%;\n}\n.chartBtn-box[data-v-1f79daf6]{\r\n    display: flex;\r\n    margin-bottom: 2rem;\n}\nbutton.chartBtn[data-v-1f79daf6],\r\nbutton.chartBtn[data-v-1f79daf6]:visited,\r\nbutton.chartBtn[data-v-1f79daf6]:active\r\n{\r\n    display: block;\r\n    padding: 0.4rem 1.4rem;\r\n    background: #ba265d;\r\n    color: #fff;\r\n    border: none;\r\n    margin: 0 0.1rem;\r\n    cursor: pointer;\r\n    outline: none;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.chart-box[data-v-1f79daf6]{\r\n    width: 100%;\n}\n.chartBtn-box[data-v-1f79daf6]{\r\n    display: flex;\r\n    margin-bottom: 2rem;\n}\nbutton.chartBtn[data-v-1f79daf6],\r\nbutton.chartBtn[data-v-1f79daf6]:visited,\r\nbutton.chartBtn[data-v-1f79daf6]:active\r\n{\r\n    display: block;\r\n    padding: 0.4rem 1.4rem;\r\n    /* background: #ba265d; */\r\n    color: #fff;\r\n    border: none;\r\n    margin: 0 0.1rem;\r\n    cursor: pointer;\r\n    outline: none;\n}\n.line[data-v-1f79daf6]{\r\n    background: #90ed7d;\n}\n.pie[data-v-1f79daf6] {\r\n    background: #f7a35c;\n}\n.bar[data-v-1f79daf6] {\r\n    background: #7cb5ec;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -45409,14 +45418,16 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "button-submit",
-              attrs: { type: "submit", disabled: !_vm.email || !_vm.password }
+          _c("button", {
+            staticClass: "button-submit",
+            attrs: {
+              type: "submit",
+              disabled: !_vm.email || !_vm.password || _vm.loading
             },
-            [_vm._v("Login")]
-          )
+            domProps: {
+              textContent: _vm._s(_vm.loading ? "Please wait.." : "Login")
+            }
+          })
         ]
       )
     ])
@@ -46394,40 +46405,40 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "chartBtn",
+              staticClass: "chartBtn line",
               on: {
                 click: function($event) {
                   _vm.selected = "line"
                 }
               }
             },
-            [_vm._v("Line")]
+            [_vm._v("Line Chart Analysis")]
           ),
           _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "chartBtn",
+              staticClass: "chartBtn pie",
               on: {
                 click: function($event) {
                   _vm.selected = "pie"
                 }
               }
             },
-            [_vm._v("Pie")]
+            [_vm._v("Pie Chart Analysis")]
           ),
           _vm._v(" "),
           _c(
             "button",
             {
-              staticClass: "chartBtn",
+              staticClass: "chartBtn bar",
               on: {
                 click: function($event) {
                   _vm.selected = "bar"
                 }
               }
             },
-            [_vm._v("Column")]
+            [_vm._v("Column Chart Analysis")]
           )
         ])
       : _vm._e(),

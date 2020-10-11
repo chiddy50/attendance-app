@@ -17,7 +17,12 @@
           <input type="email" v-model="email">
           <label for="password">Password</label>
           <input type="password" v-model="password">
-          <button type="submit" :disabled="!email || !password" class="button-submit">Login</button>
+
+          <button type="submit" 
+          :disabled="!email || !password || loading" 
+          class="button-submit" 
+          v-text="loading?'Please wait..':'Login'"></button>
+
         </form>
       </div>
     </div>
@@ -29,11 +34,13 @@ export default {
     data(){
       return {
         email: null,
-        password: null
+        password: null,
+        loading: null
       }
     },
     methods: {
       login(){
+        this.loading = true
         // console.log(this.$store);
         let self = this;
         let user = {
@@ -51,6 +58,7 @@ export default {
           console.log(error);
         })
         .catch(err => console.error(err))
+        .finally(() => self.loading = false)
       }
     },
     beforeMount(){
