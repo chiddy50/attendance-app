@@ -74,7 +74,11 @@ button.chartBtn:active
 }
 
 .line{
-    background: #90ed7d;
+    /* background: #90ed7d; */
+    background: #7cb5ec;
+
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 
 .pie {
@@ -82,7 +86,11 @@ button.chartBtn:active
 }
 
 .bar {
-    background: #7cb5ec;
+    /* background: #7cb5ec; */
+    background: #90ed7d;
+
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
 }
 
 </style>

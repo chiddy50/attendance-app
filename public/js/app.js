@@ -4157,7 +4157,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.chart-box[data-v-1f79daf6]{\r\n    width: 100%;\n}\n.chartBtn-box[data-v-1f79daf6]{\r\n    display: flex;\r\n    margin-bottom: 2rem;\n}\nbutton.chartBtn[data-v-1f79daf6],\r\nbutton.chartBtn[data-v-1f79daf6]:visited,\r\nbutton.chartBtn[data-v-1f79daf6]:active\r\n{\r\n    display: block;\r\n    padding: 0.4rem 1.4rem;\r\n    /* background: #ba265d; */\r\n    color: #fff;\r\n    border: none;\r\n    margin: 0 0.1rem;\r\n    cursor: pointer;\r\n    outline: none;\n}\n.line[data-v-1f79daf6]{\r\n    background: #90ed7d;\n}\n.pie[data-v-1f79daf6] {\r\n    background: #f7a35c;\n}\n.bar[data-v-1f79daf6] {\r\n    background: #7cb5ec;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.chart-box[data-v-1f79daf6]{\r\n    width: 100%;\n}\n.chartBtn-box[data-v-1f79daf6]{\r\n    display: flex;\r\n    margin-bottom: 2rem;\n}\nbutton.chartBtn[data-v-1f79daf6],\r\nbutton.chartBtn[data-v-1f79daf6]:visited,\r\nbutton.chartBtn[data-v-1f79daf6]:active\r\n{\r\n    display: block;\r\n    padding: 0.4rem 1.4rem;\r\n    /* background: #ba265d; */\r\n    color: #fff;\r\n    border: none;\r\n    margin: 0 0.1rem;\r\n    cursor: pointer;\r\n    outline: none;\n}\n.line[data-v-1f79daf6]{\r\n    /* background: #90ed7d; */\r\n    background: #7cb5ec;\r\n\r\n    border-top-left-radius: 6px;\r\n    border-bottom-left-radius: 6px;\n}\n.pie[data-v-1f79daf6] {\r\n    background: #f7a35c;\n}\n.bar[data-v-1f79daf6] {\r\n    /* background: #7cb5ec; */\r\n    background: #90ed7d;\r\n\r\n    border-top-right-radius: 6px;\r\n    border-bottom-right-radius: 6px;\n}\r\n\r\n", ""]);
 
 // exports
 
