@@ -99,6 +99,7 @@ export default {
     methods: {
         getMonthRecord(){
             let self = this
+            this.firstLoading = true
             console.log(this.month);
             this.hideTable = false
             axios.post('api/month-records', {
@@ -117,10 +118,14 @@ export default {
             .catch(err => {
                 console.error(err.response);
             })
+            .finally(() => this.firstLoading = false)
+
         },
         getDayRecords(){
             let self = this
             this.hideTable = true
+            this.firstLoading = true
+
             axios.post('api/date-record', {
                 employee_id: this.$route.params.id,
                 date: this.date
@@ -133,7 +138,7 @@ export default {
             .catch(err => {
                 console.error(err.response);
             })
-
+            .finally(() => this.firstLoading = false)
         },
         
         stylePresent(status){

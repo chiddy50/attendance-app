@@ -4012,7 +4012,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getMonthRecord: function getMonthRecord() {
+      var _this2 = this;
+
       var self = this;
+      this.firstLoading = true;
       console.log(this.month);
       this.hideTable = false;
       axios.post('api/month-records', {
@@ -4029,11 +4032,16 @@ __webpack_require__.r(__webpack_exports__);
         }
       })["catch"](function (err) {
         console.error(err.response);
+      })["finally"](function () {
+        return _this2.firstLoading = false;
       });
     },
     getDayRecords: function getDayRecords() {
+      var _this3 = this;
+
       var self = this;
       this.hideTable = true;
+      this.firstLoading = true;
       axios.post('api/date-record', {
         employee_id: this.$route.params.id,
         date: this.date
@@ -4042,6 +4050,8 @@ __webpack_require__.r(__webpack_exports__);
         self.record = response.data[0];
       })["catch"](function (err) {
         console.error(err.response);
+      })["finally"](function () {
+        return _this3.firstLoading = false;
       });
     },
     stylePresent: function stylePresent(status) {
