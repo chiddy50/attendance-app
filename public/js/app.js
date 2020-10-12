@@ -3216,6 +3216,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.paginationUsers = this.employees.slice(begin, end);
     },
     resetPagination: function resetPagination() {
+      this.noEmployee = 'waiting';
       this.paginationUsers = [];
       this.dataOffset = 0;
       this.currentPage = 1;
@@ -46323,6 +46324,21 @@ var render = function() {
             },
             [_vm._v("Previous")]
           ),
+          _vm._v(" "),
+          _vm.noEmployee == "There is data"
+            ? _c(
+                "button",
+                { staticClass: "paginationBtn", attrs: { disabled: "" } },
+                [
+                  _vm._v(
+                    "Page " +
+                      _vm._s(_vm.currentPage) +
+                      " of " +
+                      _vm._s(_vm.getNumberOfPages)
+                  )
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "button",

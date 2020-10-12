@@ -31,7 +31,7 @@
     <div class="pagination-box" v-if="noEmployee != 'nothing'">
       <button class="paginationBtn firstPage" @click="firstPage" :class="{fade: disableFirst}" :disabled="disableFirst">First</button> 
       <button class="paginationBtn" @click="prevPage" :class="{fade: disablePrev}" :disabled="disablePrev">Previous</button> 
-      <!-- <button class="paginationBtn">This of That</button>  -->
+      <button class="paginationBtn" v-if="noEmployee == 'There is data'" disabled>Page {{ currentPage }} of {{ getNumberOfPages }}</button> 
       <button class="paginationBtn" @click="nextPage" :class="{fade: disableNext}" :disabled="disableNext">Next</button> 
       <button class="paginationBtn lastPage" @click="lastPage" :class="{fade: disableLast}" :disabled="disableLast">Last</button> 
     </div>
@@ -182,6 +182,7 @@ export default {
     },
 
     resetPagination(){
+      this.noEmployee = 'waiting'
       this.paginationUsers = []
       this.dataOffset = 0
       this.currentPage = 1
