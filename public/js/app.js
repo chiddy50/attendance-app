@@ -3974,6 +3974,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'staffRecord',
@@ -3986,7 +3988,8 @@ __webpack_require__.r(__webpack_exports__);
       noRecord: 'waiting',
       hideTable: false,
       records: [],
-      record: null
+      record: null,
+      firstLoading: true
     };
   },
   mounted: function mounted() {
@@ -3996,10 +3999,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("api/staff/".concat(this.$route.params.id)).then(function (response) {
-      console.log(response);
+      // console.log(response);
       _this.staff = response.data;
     })["catch"](function (err) {
       return console.log(err);
+    })["finally"](function () {
+      return _this.firstLoading = false;
     });
   },
   beforeDestroy: function beforeDestroy() {
@@ -4014,7 +4019,7 @@ __webpack_require__.r(__webpack_exports__);
         employee_id: this.$route.params.id,
         month_id: this.month
       }).then(function (response) {
-        console.log(response);
+        // console.log(response)
         self.records = response.data.records;
 
         if (!response.data.records.length) {
@@ -4408,7 +4413,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#month[data-v-8d1cfafc],\r\n.date[data-v-8d1cfafc]{\r\n    width: 100%;\n}\n.flex[data-v-8d1cfafc]{\r\n  display: flex;\r\n  justify-content: space-evenly;\n}\ntd.present[data-v-8d1cfafc]{\r\n    color: rgb(40, 151, 40);\n}\ntd.absent[data-v-8d1cfafc] {\r\n    color: rgb(218, 31, 31);\n}\r\n", ""]);
+exports.push([module.i, "\n#month[data-v-8d1cfafc],\r\n.date[data-v-8d1cfafc]{\r\n    width: 100%;\n}\n.loadingText[data-v-8d1cfafc]{\r\n    font-size: 2rem;\r\n    margin-top: 2rem;\r\n    text-align: center;\n}\n.flex[data-v-8d1cfafc]{\r\n  display: flex;\r\n  justify-content: space-evenly;\n}\ntd.present[data-v-8d1cfafc]{\r\n    color: rgb(40, 151, 40);\n}\ntd.absent[data-v-8d1cfafc] {\r\n    color: rgb(218, 31, 31);\n}\r\n", ""]);
 
 // exports
 
@@ -47182,7 +47187,13 @@ var render = function() {
                 })
               ])
             : _vm._e()
+        ]),
+    _vm._v(" "),
+    _vm.firstLoading
+      ? _c("h4", { staticClass: "loadingText" }, [
+          _vm._v("Loading, please wait....")
         ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [

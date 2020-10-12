@@ -57,6 +57,8 @@
             </tr>
         </table>
 
+        <h4 class="loadingText" v-if="firstLoading">Loading, please wait....</h4>
+
     </div>
 </template>
 
@@ -74,7 +76,8 @@ export default {
             noRecord: 'waiting',
             hideTable: false,
             records: [],
-            record: null
+            record: null,
+            firstLoading: true
         }
     },
     mounted(){
@@ -84,10 +87,11 @@ export default {
     beforeCreate(){
         axios.get(`api/staff/${this.$route.params.id}`)
         .then(response => {
-            console.log(response);
+            // console.log(response);
             this.staff = response.data
         })
         .catch(err => console.log(err))
+        .finally(() => this.firstLoading = false)
     },
     beforeDestroy(){
         this.staff = null
@@ -102,7 +106,7 @@ export default {
                 month_id: this.month
             })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 self.records = response.data.records
                 if (!response.data.records.length) {
                     self.noRecord = "yes"
@@ -155,6 +159,12 @@ export default {
 .date{
     width: 100%;
 
+}
+
+.loadingText{
+    font-size: 2rem;
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .flex{
