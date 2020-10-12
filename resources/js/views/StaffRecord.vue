@@ -141,7 +141,7 @@ export default {
         },
 
         formatPresent(status){
-            return status === 1 ? "Present" : "Absent";
+            return status == 1 ? "Present" : "Absent";
         },
         formatDate(date) {
             return moment(date).format('LL');

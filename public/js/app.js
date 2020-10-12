@@ -4047,7 +4047,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     formatPresent: function formatPresent(status) {
-      return status === 1 ? "Present" : "Absent";
+      return status == 1 ? "Present" : "Absent";
     },
     formatDate: function formatDate(date) {
       return moment__WEBPACK_IMPORTED_MODULE_0___default()(date).format('LL');
