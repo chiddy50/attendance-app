@@ -4040,7 +4040,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     stylePresent: function stylePresent(status) {
-      if (status === 1) {
+      if (status == 1) {
         return "present";
       } else {
         return "absent";

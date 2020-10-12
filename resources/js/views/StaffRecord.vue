@@ -133,7 +133,7 @@ export default {
         },
         
         stylePresent(status){
-            if (status === 1) {
+            if (status == 1) {
                 return "present"
             }else{
                 return "absent"
