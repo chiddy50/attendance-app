@@ -3114,6 +3114,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3125,8 +3133,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       teamId: null,
       loading: false,
       employees: [],
-      noEmployee: 'waiting'
+      noEmployee: 'waiting',
+      paginationUsers: [],
+      dataOffset: 0,
+      perpage: 4,
+      //but 3 actually bcus index starts from 0 not 1
+      currentPage: 1,
+      dataLength: 0,
+      disablePrev: true,
+      disableNext: true,
+      disableLast: true,
+      disableFirst: true
     };
+  },
+  computed: {
+    getNumberOfPages: function getNumberOfPages() {
+      return Math.ceil(this.employees.length / this.perpage);
+    }
   },
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getTeams'])), {}, {
     getTeamEmployees: function getTeamEmployees() {
@@ -3135,6 +3158,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       var self = this;
+      this.resetPagination();
       this.loading = true;
       axios.get("api/team-employees/".concat(this.teamId)).then(function (response) {
         console.log(response);
@@ -3143,13 +3167,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (!response.data.length) {
           self.noEmployee = "nothing";
         } else {
-          self.noEmployee = "waiting";
+          self.noEmployee = "There is data";
+          self.addPagination(response.data);
         }
       })["catch"](function (error) {
         return console.log(error);
       })["finally"](function () {
         return self.loading = false;
       });
+    },
+    addPagination: function addPagination(data) {
+      this.dataLength = data.length;
+      var pageData = data.slice(this.dataOffset, this.perpage);
+
+      if (this.dataLength > this.perpage) {
+        this.disableNext = false;
+        this.disableLast = false;
+      } else {
+        this.disableNext = true;
+        this.disableLast = true;
+      }
+
+      if (this.currentPage == 1) {
+        this.disablePrev = true;
+      }
+
+      this.paginationUsers = pageData;
+    },
+    nextPage: function nextPage() {
+      this.currentPage += 1;
+      this.load();
+    },
+    prevPage: function prevPage() {
+      this.currentPage -= 1;
+      this.load();
+    },
+    firstPage: function firstPage() {
+      this.currentPage = 1;
+      this.load();
+    },
+    lastPage: function lastPage() {
+      this.currentPage = this.getNumberOfPages;
+      this.load();
+    },
+    load: function load() {
+      var begin = (this.currentPage - 1) * this.perpage;
+      var end = begin + this.perpage;
+      this.paginationUsers = this.employees.slice(begin, end);
+    },
+    resetPagination: function resetPagination() {
+      this.paginationUsers = [];
+      this.dataOffset = 0;
+      this.currentPage = 1;
+      this.dataLength = 0;
+      this.disablePrev = true;
+      this.disableNext = true;
+      this.disableLast = true;
+      this.disableFirst = true;
     },
     recordAll: function recordAll(e) {
       var self = this;
@@ -3278,7 +3352,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         timer: 1500
       });
     }
-  })
+  }),
+  watch: {
+    currentPage: function currentPage(val) {
+      if (this.currentPage == this.getNumberOfPages) {
+        this.disableNext = true;
+        this.disableLast = true;
+      } else {
+        this.disableNext = false;
+        this.disableLast = false;
+      }
+
+      if (val != 1 || this.currentPage != 1 || this.currentPage > 1) {
+        this.disablePrev = false;
+        this.disableFirst = false;
+      } else {
+        this.disablePrev = true;
+        this.disableFirst = true;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -4105,7 +4198,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.mm-y{\r\n  margin: 2rem 0 2rem;\n}\n.row h1{\r\n  margin: 1rem 0 3rem;\r\n  color: #000;\r\n  font-size: 3rem;\n}\n.spinner{\r\n  font-size: 2rem;\n}\nul.list__group li button {\r\n  float: right;\n}\ntable {\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n  width: 100%;\r\n  border: 1px solid #ddd;\n}\nth{\r\n  color: #000;\r\n  font-size: 1.6rem;\n}\ntd{\r\n  font-size: 1.4rem;\n}\nth, td {\r\n  text-align: left;\r\n  padding: 8px;\n}\ntr:nth-child(even){background-color: #f2f2f2}\ni.spinner-md{\r\n    display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.mm-y{\r\n  margin: 2rem 0 2rem;\n}\n.row h1{\r\n  margin: 1rem 0 3rem;\r\n  color: #000;\r\n  font-size: 3rem;\n}\n.spinner{\r\n  font-size: 2rem;\n}\nul.list__group li button {\r\n  float: right;\n}\ntable {\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n  width: 100%;\r\n  border: 1px solid #ddd;\n}\nth{\r\n  color: #000;\r\n  font-size: 1.6rem;\n}\ntd{\r\n  font-size: 1.4rem;\n}\nth, td {\r\n  text-align: left;\r\n  padding: 8px;\n}\ntr:nth-child(even){background-color: #f2f2f2}\ni.spinner-md{\r\n    display: none;\n}\r\n\r\n/* BUTTON STYLES */\n.pagination-box{\r\n  display: flex;\r\n  margin-bottom: 2rem;\n}\nbutton.paginationBtn,\r\nbutton.paginationBtn:visited,\r\nbutton.paginationBtn:active\r\n{\r\n    display: block;\r\n    padding: 0.4rem 1.4rem;\r\n    background: #4b90d4;\r\n    color: #fff;\r\n    border: none;\r\n    margin: 0 0.1rem;\r\n    cursor: pointer;\r\n    outline: none;\n}\n.fade {\r\n  opacity: 0.5;\n}\n.firstPage {\r\n  border-top-left-radius: 5px;\r\n  border-bottom-left-radius: 5px;\n}\n.lastPage {\r\n  border-top-right-radius: 5px;\r\n  border-bottom-right-radius: 5px;\n}\r\n", ""]);
 
 // exports
 
@@ -45993,8 +46086,8 @@ var render = function() {
                   expression: "month"
                 }
               ],
-              staticClass: "staff__input team",
-              attrs: { name: "team", id: "team", disabled: _vm.loading },
+              staticClass: "staff__input month",
+              attrs: { name: "month", id: "month", disabled: _vm.loading },
               on: {
                 change: function($event) {
                   var $$selectedVal = Array.prototype.filter
@@ -46063,92 +46156,144 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticStyle: { "overflow-x": "auto" } }, [
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.recordAll($event)
-            }
-          }
-        },
-        [
+    _vm.noEmployee != "nothing"
+      ? _c("div", { staticClass: "pagination-box" }, [
           _c(
-            "table",
-            { staticClass: "attendance__table" },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._l(_vm.employees, function(employee) {
-                return _c("tr", { key: employee.id }, [
-                  _c("td", [_vm._v(_vm._s(employee.firstname))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(employee.lastname))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("label", [_vm._v("Present")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "present_field",
-                      attrs: {
-                        type: "radio",
-                        name: "attendance[" + [employee.id] + "]",
-                        value: "Present"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("label", [_vm._v("Absent")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "present_field",
-                      attrs: {
-                        type: "radio",
-                        name: "attendance[" + [employee.id] + "]",
-                        value: "Absent"
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "single_attendance",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.record($event, employee.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-check" })]
-                    ),
-                    _vm._v(" "),
-                    _c("i", {
-                      staticClass: "fas fa-spinner fa-spin spinner-md"
-                    })
-                  ])
-                ])
-              })
-            ],
-            2
+            "button",
+            {
+              staticClass: "paginationBtn firstPage",
+              class: { fade: _vm.disableFirst },
+              attrs: { disabled: _vm.disableFirst },
+              on: { click: _vm.firstPage }
+            },
+            [_vm._v("First")]
           ),
           _vm._v(" "),
-          _vm.employees.length
-            ? _c("button", {
-                staticClass: "button-submit mm-y",
-                attrs: { type: "submit", disabled: _vm.loading },
-                domProps: {
-                  textContent: _vm._s(_vm.loading ? "Recording..." : "Record")
+          _c(
+            "button",
+            {
+              staticClass: "paginationBtn",
+              class: { fade: _vm.disablePrev },
+              attrs: { disabled: _vm.disablePrev },
+              on: { click: _vm.prevPage }
+            },
+            [_vm._v("Previous")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "paginationBtn",
+              class: { fade: _vm.disableNext },
+              attrs: { disabled: _vm.disableNext },
+              on: { click: _vm.nextPage }
+            },
+            [_vm._v("Next")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "paginationBtn lastPage",
+              class: { fade: _vm.disableLast },
+              attrs: { disabled: _vm.disableLast },
+              on: { click: _vm.lastPage }
+            },
+            [_vm._v("Last")]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.noEmployee != "nothing"
+      ? _c("div", { staticStyle: { "overflow-x": "auto" } }, [
+          _c(
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.recordAll($event)
                 }
-              })
-            : _vm._e()
-        ]
-      )
-    ]),
+              }
+            },
+            [
+              _c(
+                "table",
+                { staticClass: "attendance__table" },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.paginationUsers, function(employee) {
+                    return _c("tr", { key: employee.id }, [
+                      _c("td", [_vm._v(_vm._s(employee.firstname))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(employee.lastname))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c("label", [_vm._v("Present")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "present_field",
+                          attrs: {
+                            type: "radio",
+                            name: "attendance[" + [employee.id] + "]",
+                            value: "Present"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", [_vm._v("Absent")]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "present_field",
+                          attrs: {
+                            type: "radio",
+                            name: "attendance[" + [employee.id] + "]",
+                            value: "Absent"
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "single_attendance",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.record($event, employee.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-check" })]
+                        ),
+                        _vm._v(" "),
+                        _c("i", {
+                          staticClass: "fas fa-spinner fa-spin spinner-md"
+                        })
+                      ])
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _vm.employees.length
+                ? _c("button", {
+                    staticClass: "button-submit mm-y",
+                    attrs: { type: "submit", disabled: _vm.loading },
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.loading ? "Recording..." : "Record"
+                      )
+                    }
+                  })
+                : _vm._e()
+            ]
+          )
+        ])
+      : _vm._e(),
     _vm._v(" "),
     _vm.noEmployee == "nothing"
       ? _c("ul", { staticClass: "list__group" }, [

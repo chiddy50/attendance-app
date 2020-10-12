@@ -13,7 +13,7 @@
             </select>
           <!-- </div> -->
           <!-- <div class="col-1-3"> -->
-            <select name="team" id="team" :disabled="loading" class="staff__input team" v-model="month">
+            <select name="month" id="month" :disabled="loading" class="staff__input month" v-model="month">
               <option :value="null" disabled selected>Choose Month</option>
               <option :value="month.id" v-for="month in $store.state.months" :key="month.id">
                   {{ month.name }}
@@ -28,8 +28,16 @@
       </form>
     </div>
 
+    <div class="pagination-box" v-if="noEmployee != 'nothing'">
+      <button class="paginationBtn firstPage" @click="firstPage" :class="{fade: disableFirst}" :disabled="disableFirst">First</button> 
+      <button class="paginationBtn" @click="prevPage" :class="{fade: disablePrev}" :disabled="disablePrev">Previous</button> 
+      <!-- <button class="paginationBtn">This of That</button>  -->
+      <button class="paginationBtn" @click="nextPage" :class="{fade: disableNext}" :disabled="disableNext">Next</button> 
+      <button class="paginationBtn lastPage" @click="lastPage" :class="{fade: disableLast}" :disabled="disableLast">Last</button> 
+    </div>
 
-    <div style="overflow-x:auto;">
+
+    <div style="overflow-x:auto;" v-if="noEmployee != 'nothing'">
       <form @submit.prevent="recordAll($event)">
         <table class="attendance__table">
           <tr>
@@ -38,7 +46,7 @@
             <th>Present?</th>
             <th>Record</th>
           </tr>
-          <tr v-for="employee in employees" :key="employee.id">
+          <tr v-for="employee in paginationUsers" :key="employee.id">
             <td>{{ employee.firstname }}</td>
             <td>{{ employee.lastname }}</td>
             <td>
@@ -84,8 +92,24 @@ export default {
       teamId: null,
       loading: false,
       employees: [],
-      noEmployee: 'waiting'
+      noEmployee: 'waiting',
+
+      paginationUsers: [],
+      dataOffset: 0,
+      perpage: 4, //but 3 actually bcus index starts from 0 not 1
+      currentPage: 1,
+      dataLength: 0,
+      disablePrev: true,
+      disableNext: true,
+      disableLast: true,
+      disableFirst: true
     }
+  },
+
+  computed: {
+    getNumberOfPages() {
+      return Math.ceil(this.employees.length / this.perpage);
+    },
   },
   methods: {
     ...mapActions(['getTeams']),
@@ -94,6 +118,7 @@ export default {
         return
       }
       let self = this
+      this.resetPagination()
       this.loading = true
       axios.get(`api/team-employees/${this.teamId}`)
       .then(response => {
@@ -102,11 +127,69 @@ export default {
         if (!response.data.length) {
             self.noEmployee = "nothing"
         }else{
-            self.noEmployee = "waiting"
+            self.noEmployee = "There is data"
+            self.addPagination(response.data)
         }
       })
       .catch(error => console.log(error))
       .finally(() => self.loading = false)
+    },
+
+    addPagination(data){
+      this.dataLength = data.length;
+
+      var pageData = data.slice(this.dataOffset, this.perpage);
+
+      if (this.dataLength > this.perpage) {
+        this.disableNext = false
+        this.disableLast = false
+      }else{
+        this.disableNext = true
+        this.disableLast = true
+      }
+
+      if (this.currentPage == 1) {
+        this.disablePrev = true
+      }
+
+      this.paginationUsers = pageData;
+    },
+
+    nextPage(){
+      this.currentPage += 1
+      this.load()
+    },
+
+    prevPage(){
+      this.currentPage -= 1
+      this.load()
+    },
+
+    firstPage() {
+      this.currentPage = 1;
+      this.load();
+    },
+
+    lastPage() {
+      this.currentPage = this.getNumberOfPages;
+      this.load();
+    },
+
+    load(){
+      var begin = ((this.currentPage - 1) * this.perpage);
+      var end = begin + this.perpage;
+      this.paginationUsers = this.employees.slice(begin, end);
+    },
+
+    resetPagination(){
+      this.paginationUsers = []
+      this.dataOffset = 0
+      this.currentPage = 1
+      this.dataLength = 0
+      this.disablePrev = true
+      this.disableNext = true
+      this.disableLast = true
+      this.disableFirst = true
     },
 
     recordAll(e){
@@ -241,9 +324,28 @@ export default {
         timer: 1500
       })
     }
+  },
 
+  watch: {
+    currentPage(val){
+      if (this.currentPage == this.getNumberOfPages) {
+        this.disableNext = true
+        this.disableLast = true
+      }else{
+        this.disableNext = false
+        this.disableLast = false
+      }
 
+      if (val != 1 || this.currentPage != 1 || this.currentPage > 1) {
+        this.disablePrev = false
+        this.disableFirst = false
+      }else{
+        this.disablePrev = true
+        this.disableFirst = true
+      }
+    }
   }
+
 }
 </script>
 
@@ -299,5 +401,39 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 i.spinner-md{
     display: none;
+}
+
+/* BUTTON STYLES */
+.pagination-box{
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+button.paginationBtn,
+button.paginationBtn:visited,
+button.paginationBtn:active
+{
+    display: block;
+    padding: 0.4rem 1.4rem;
+    background: #4b90d4;
+    color: #fff;
+    border: none;
+    margin: 0 0.1rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.fade {
+  opacity: 0.5;
+}
+
+.firstPage {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.lastPage {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 </style>
