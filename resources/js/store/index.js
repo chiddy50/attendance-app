@@ -118,7 +118,7 @@ export const store = new Vuex.Store({
 
             axios({
             method: 'get',
-            url: 'http://sample.test/api/logout',
+            url: 'api/logout',
             headers: {'Authorization': `Bearer ${token}`}
             })
             .then(response => {

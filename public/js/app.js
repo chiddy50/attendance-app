@@ -64799,7 +64799,7 @@ var store = new Vuex.Store({
       var token = JSON.parse(VueCookies.get('token'));
       axios({
         method: 'get',
-        url: 'http://sample.test/api/logout',
+        url: 'api/logout',
         headers: {
           'Authorization': "Bearer ".concat(token)
         }
