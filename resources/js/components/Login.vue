@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     name: 'login',
     data(){
@@ -56,6 +58,14 @@ export default {
         },
         error => {
           console.log(error);
+          // console.log(error.response);
+          Swal.fire({
+              position: 'top-end',
+              icon: `error`,
+              title: `${error.response.data.error} credentials`,
+              showConfirmButton: false,
+              timer: 1500
+          }) 
         })
         .catch(err => console.error(err))
         .finally(() => self.loading = false)

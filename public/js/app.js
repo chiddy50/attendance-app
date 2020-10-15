@@ -2492,6 +2492,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2522,6 +2524,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'login',
   data: function data() {
@@ -2545,7 +2548,15 @@ __webpack_require__.r(__webpack_exports__);
         self.$router.push('/');
         window.location.reload();
       }, function (error) {
-        console.log(error);
+        console.log(error); // console.log(error.response);
+
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          position: 'top-end',
+          icon: "error",
+          title: "".concat(error.response.data.error, " credentials"),
+          showConfirmButton: false,
+          timer: 1500
+        });
       })["catch"](function (err) {
         return console.error(err);
       })["finally"](function () {
