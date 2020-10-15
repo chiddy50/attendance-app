@@ -3188,7 +3188,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           self.addPagination(response.data);
         }
       })["catch"](function (error) {
-        return console.log(error);
+        console.log(error.response);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+          position: 'top-end',
+          icon: "error",
+          title: 'Network error please try again',
+          showConfirmButton: false,
+          timer: 1500
+        });
       })["finally"](function () {
         return self.dataLoading = false;
       });

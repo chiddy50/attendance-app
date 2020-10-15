@@ -137,7 +137,16 @@ export default {
             self.addPagination(response.data)
         }
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error.response)
+        Swal.fire({
+            position: 'top-end',
+            icon: `error`,
+            title: 'Network error please try again',
+            showConfirmButton: false,
+            timer: 1500
+          })
+      })
       .finally(() => self.dataLoading = false)
     },
 
