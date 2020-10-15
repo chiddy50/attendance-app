@@ -5,7 +5,9 @@
             <div class="form__container">
                 <form class="staff__form">
                     <label for="date">Pick a month</label>
-                    <select v-model="month" id="month" @change="getMonthRecord" :disabled="!$store.state.months.length">
+                    <select v-model="month" id="month"
+                     @change="getMonthRecord" 
+                     :disabled="!$store.state.months.length || firstLoading">
                         <option :value="null" disabled selected>Choose a month</option>
                         <option :value="month.id" v-for="month in $store.state.months" :key="month.id">
                             {{ month.name }}
@@ -17,7 +19,7 @@
             <div class="form__container">
                 <form class="staff__form">
                     <label for="date">Pick a date</label>
-                    <input type="date" @change="getDayRecords" v-model="date" class="staff__input date">
+                    <input type="date" :disabled="firstLoading" @change="getDayRecords" v-model="date" class="staff__input date">
                 </form>
             </div>
 

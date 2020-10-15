@@ -3993,6 +3993,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'staffRecord',
@@ -47083,7 +47085,10 @@ var render = function() {
                   expression: "month"
                 }
               ],
-              attrs: { id: "month", disabled: !_vm.$store.state.months.length },
+              attrs: {
+                id: "month",
+                disabled: !_vm.$store.state.months.length || _vm.firstLoading
+              },
               on: {
                 change: [
                   function($event) {
@@ -47146,7 +47151,7 @@ var render = function() {
               }
             ],
             staticClass: "staff__input date",
-            attrs: { type: "date" },
+            attrs: { type: "date", disabled: _vm.firstLoading },
             domProps: { value: _vm.date },
             on: {
               change: _vm.getDayRecords,
@@ -65594,8 +65599,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\projects\Laravel\sample\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\projects\Laravel\sample\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\projects\Laravel\attendanceApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\projects\Laravel\attendanceApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
