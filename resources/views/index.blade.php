@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf_token" content="{{ csrf_token() }}">
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/sidemenu.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
+        <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ secure_asset('css/sidemenu.css') }}">
+        <link rel="stylesheet" href="{{ secure_asset('css/all.css') }}">
+        <link rel="stylesheet" href="{{ secure_asset('css/layout.css') }}">
         <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' }</script>
         <title>Attendance App</title>
     </head>
@@ -21,7 +21,7 @@
             {{-- </div> --}}
         </div>
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+    <script src="{{ secure_asset('js/app.js') }}"></script>
+    <script src="{{ secure_asset('js/script.js') }}"></script>
     </body>
 </html>
