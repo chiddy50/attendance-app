@@ -3133,6 +3133,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3143,6 +3148,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       month: null,
       teamId: null,
       loading: false,
+      dataLoading: false,
       employees: [],
       noEmployee: 'waiting',
       paginationUsers: [],
@@ -3170,7 +3176,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var self = this;
       this.resetPagination();
-      this.loading = true;
+      this.dataLoading = true;
       axios.get("api/team-employees/".concat(this.teamId)).then(function (response) {
         console.log(response);
         self.employees = response.data;
@@ -3184,7 +3190,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {
         return console.log(error);
       })["finally"](function () {
-        return self.loading = false;
+        return self.dataLoading = false;
       });
     },
     addPagination: function addPagination(data) {
@@ -46484,6 +46490,12 @@ var render = function() {
     _vm.noEmployee == "nothing"
       ? _c("ul", { staticClass: "list__group" }, [
           _c("li", [_vm._v("No employees in this team")])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.dataLoading
+      ? _c("ul", { staticClass: "list__group" }, [
+          _c("li", [_vm._v("Loading data.....")])
         ])
       : _vm._e()
   ])

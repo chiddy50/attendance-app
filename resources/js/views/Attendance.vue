@@ -5,7 +5,9 @@
       <form class="attendance__form">
         <div class="flex">
           <!-- <div class="col-1-3"> -->
-            <select name="team" id="team" :disabled="loading" class="staff__input team" v-model="teamId" @change="getTeamEmployees">
+            <select name="team" id="team" 
+            :disabled="loading" class="staff__input team" 
+            v-model="teamId" @change="getTeamEmployees">
               <option :value="null" disabled selected>Please Select a Team</option>
               <option :value="team.id" v-for="team in $store.state.teams" :key="team.id">
                   {{ team.name }}
@@ -76,6 +78,9 @@
     <ul class="list__group" v-if="noEmployee == 'nothing'">
       <li>No employees in this team</li>
     </ul>
+    <ul class="list__group" v-if="dataLoading">
+      <li>Loading data.....</li>
+    </ul>
   </div>
 </template>
 
@@ -91,6 +96,7 @@ export default {
       month: null,
       teamId: null,
       loading: false,
+      dataLoading: false,
       employees: [],
       noEmployee: 'waiting',
 
@@ -119,7 +125,7 @@ export default {
       }
       let self = this
       this.resetPagination()
-      this.loading = true
+      this.dataLoading = true
       axios.get(`api/team-employees/${this.teamId}`)
       .then(response => {
         console.log(response);
@@ -132,7 +138,7 @@ export default {
         }
       })
       .catch(error => console.log(error))
-      .finally(() => self.loading = false)
+      .finally(() => self.dataLoading = false)
     },
 
     addPagination(data){
