@@ -41,7 +41,6 @@ class TeamController extends Controller
     }
 
     public function show($id){
-        sleep(5);
         return Team::find($id)->employees;
     }
 
