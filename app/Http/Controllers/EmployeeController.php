@@ -62,8 +62,8 @@ class EmployeeController extends Controller
         }
         // $query = Employee::where('firstname', 'LIKE', "%$search%");
         $employees = DB::table('employees')
-        ->where('firstname','LIKE','%'.$search.'%')
-        ->orWhere('lastname','LIKE','%'.$search.'%')
+        ->where('firstname','ilike','%'.$search.'%')
+        ->orWhere('lastname','ilike','%'.$search.'%')
         ->get();
  
         // dd($query->toSql(), $query->getBindings());
