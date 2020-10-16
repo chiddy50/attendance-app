@@ -62,8 +62,10 @@ class EmployeeController extends Controller
         }
         // $query = Employee::where('firstname', 'LIKE', "%$search%");
         $employees = DB::table('employees')
-        ->where('firstname','ilike','%'.$search.'%')
-        ->orWhere('lastname','ilike','%'.$search.'%')
+        ->where('firstname','ilike','%'.$search.'%') //Pgress
+        // ->where('firstname','LIKE','%'.$search.'%') //MYSQL
+        ->orWhere('lastname','ilike','%'.$search.'%') //Pgress
+        // ->orWhere('lastname','LIKE','%'.$search.'%') //MYSQL
         ->get();
  
         // dd($query->toSql(), $query->getBindings());

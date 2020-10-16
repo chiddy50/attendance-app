@@ -90,7 +90,16 @@ export default {
           window.location.reload()
 
         })
-        .catch(err => console.error(err))
+        .catch(err => {
+          console.log(err.response)
+          Swal.fire({
+            position: 'top-end',
+            icon: `error`,
+            title: `Network error`,
+            showConfirmButton: false,
+            timer: 1500
+          }) 
+        })
         .finally(() => self.loading = false)
       }
     }

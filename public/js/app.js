@@ -2883,7 +2883,14 @@ __webpack_require__.r(__webpack_exports__);
         self.$store.commit('LOGIN_SUCCESS', response.data);
         window.location.reload();
       })["catch"](function (err) {
-        return console.error(err);
+        console.log(err.response);
+        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+          position: 'top-end',
+          icon: "error",
+          title: "Network error",
+          showConfirmButton: false,
+          timer: 1500
+        });
       })["finally"](function () {
         return self.loading = false;
       });
@@ -3178,7 +3185,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.resetPagination();
       this.dataLoading = true;
       axios.get("api/team-employees/".concat(this.teamId)).then(function (response) {
-        console.log(response);
+        // console.log(response);
         self.employees = response.data;
 
         if (!response.data.length) {
@@ -3188,7 +3195,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           self.addPagination(response.data);
         }
       })["catch"](function (error) {
-        console.log(error.response);
+        console.log(error);
         sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
           position: 'top-end',
           icon: "error",

@@ -128,7 +128,7 @@ export default {
       this.dataLoading = true
       axios.get(`api/team-employees/${this.teamId}`)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         self.employees = response.data
         if (!response.data.length) {
             self.noEmployee = "nothing"
@@ -138,7 +138,7 @@ export default {
         }
       })
       .catch(error => {
-        console.log(error.response)
+        console.log(error)
         Swal.fire({
             position: 'top-end',
             icon: `error`,
