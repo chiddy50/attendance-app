@@ -63,8 +63,8 @@ class EmployeeController extends Controller
         // $query = Employee::where('firstname', 'LIKE', "%$search%");
         $employees = DB::table('employees')
         ->where('firstname','ilike','%'.$search.'%') //Pgress
-        // ->where('firstname','LIKE','%'.$search.'%') //MYSQL
         ->orWhere('lastname','ilike','%'.$search.'%') //Pgress
+        // ->where('firstname','LIKE','%'.$search.'%') //MYSQL
         // ->orWhere('lastname','LIKE','%'.$search.'%') //MYSQL
         ->get();
  
@@ -97,6 +97,11 @@ class EmployeeController extends Controller
         ->where('date', $date)->get();
 
         return response()->json($record);
+    }
+
+    public function test()
+    {
+        $employee = Employee::find(1)->records->where('month_id', 10)->get();
     }
 
     

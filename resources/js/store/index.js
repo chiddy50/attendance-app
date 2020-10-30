@@ -125,7 +125,7 @@ export const store = new Vuex.Store({
                 // console.log(response);
                 commit('REMOVE_TOKEN');
                 vueRouter.push('/login');
-                Swal.fire(response.data.message, '', 'error') 
+                Swal.fire(response.data.message, '', 'success') 
             })
             .catch(err => {
                 console.error(err)

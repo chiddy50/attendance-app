@@ -37,6 +37,7 @@ Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::get('logout', 'AuthController@logout');
 Route::get('user', 'AuthController@getAuthUser');
+Route::get('refresh', 'AuthController@refresh');
 
 
 Route::group(['middleware' => ['admin']], function () {
@@ -55,6 +56,9 @@ Route::get('staff/{id}','EmployeeController@single');
 Route::post('live-search', 'EmployeeController@search');
 Route::post('month-records', 'EmployeeController@monthRecords');
 Route::post('date-record', 'EmployeeController@dateRecord');
+
+
+Route::get('test', 'EmployeeController@test');
 
 
 // TEAM ROUTES

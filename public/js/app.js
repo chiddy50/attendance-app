@@ -2854,14 +2854,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register(e) {
+      var _this = this;
+
       if (this.password !== this.confirm_password) {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-          position: 'top-end',
-          icon: "error",
-          title: "Password mismatch",
-          showConfirmButton: false,
-          timer: 2000
-        });
+        this.alert('error', "Password mismatch", 2000);
         return;
       }
 
@@ -2883,16 +2879,26 @@ __webpack_require__.r(__webpack_exports__);
         self.$store.commit('LOGIN_SUCCESS', response.data);
         window.location.reload();
       })["catch"](function (err) {
-        console.log(err.response);
-        sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
-          position: 'top-end',
-          icon: "error",
-          title: "Network error",
-          showConfirmButton: false,
-          timer: 1500
-        });
+        console.log(err.response.status);
+
+        if (err.response.status === 401) {
+          _this.alert('error', err.response.data.error, 1500);
+
+          return;
+        }
+
+        _this.alert('error', "Network error", 1500);
       })["finally"](function () {
         return self.loading = false;
+      });
+    },
+    alert: function alert(type, message, duration) {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.fire({
+        position: 'top-end',
+        icon: type,
+        title: message,
+        showConfirmButton: false,
+        timer: duration
       });
     }
   }
@@ -64814,7 +64820,7 @@ var store = new Vuex.Store({
         // console.log(response);
         commit('REMOVE_TOKEN');
         vueRouter.push('/login');
-        Swal.fire(response.data.message, '', 'error');
+        Swal.fire(response.data.message, '', 'success');
       })["catch"](function (err) {
         console.error(err);
         commit('REMOVE_TOKEN');

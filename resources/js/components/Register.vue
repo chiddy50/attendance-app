@@ -61,14 +61,8 @@ export default {
     methods: {
       register(e){
         if (this.password !== this.confirm_password) {
-          Swal.fire({
-            position: 'top-end',
-            icon: `error`,
-            title: `Password mismatch`,
-            showConfirmButton: false,
-            timer: 2000
-          })
-          return
+          this.alert('error', `Password mismatch`, 2000);
+          return;
         }
         this.loading = true
         let self = this
@@ -91,16 +85,25 @@ export default {
 
         })
         .catch(err => {
-          console.log(err.response)
-          Swal.fire({
-            position: 'top-end',
-            icon: `error`,
-            title: `Network error`,
-            showConfirmButton: false,
-            timer: 1500
-          }) 
+          console.log(err.response.status)
+          if (err.response.status === 401) {
+            this.alert('error', err.response.data.error, 1500)
+            return;
+          }
+          this.alert('error', `Network error`, 1500)
+          
         })
         .finally(() => self.loading = false)
+      },
+
+      alert(type, message, duration){
+        Swal.fire({
+          position: 'top-end',
+          icon: type,
+          title: message,
+          showConfirmButton: false,
+          timer: duration
+        }) 
       }
     }
 }

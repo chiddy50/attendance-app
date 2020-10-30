@@ -103,8 +103,8 @@ export default {
                 let timeExpire = exp - currentTimestamp;
                 // console.log(timeExpire);
                 if (timeExpire <= 5) {
-                    console.log("TIME IS UP!!");
-                    this.$store.dispatch("logout");
+                  console.log("TIME IS UP!!");
+                  this.$store.dispatch("logout");
                 }                
 
             }catch (error) {

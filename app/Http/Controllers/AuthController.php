@@ -13,7 +13,11 @@ class AuthController extends Controller
     public function register(Request $request)
     {
       // dd([$request->name, $request->email, $request->password, $request->admin, $request->user]);
-      
+      $user = User::where('name', $request->name)->first();
+      if (isset($user->id)) {
+        return response()->json(['error' => 'Username exists already'], 401);
+      }
+
       $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
@@ -50,7 +54,7 @@ class AuthController extends Controller
       return $this->respondWithToken($token);
     }
 
-    public function getAuthUser(Request $request)
+    public function getAuthUser()
     {
       return response()->json(auth()->user());
     }
@@ -59,6 +63,16 @@ class AuthController extends Controller
     {
       auth()->logout();
       return response()->json(['message'=>'Successfully logged out']);
+    }
+
+    /**
+     * Refresh a token
+     * 
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refresh()
+    {
+      return $this->respondWithToken(auth()->refresh());
     }
 
     protected function respondWithToken($token)
