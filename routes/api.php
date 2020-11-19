@@ -66,6 +66,7 @@ Route::get('teams', 'TeamController@index');
 Route::post('team', 'TeamController@store');
 Route::get('team-employees/{id}', 'TeamController@show');
 Route::get('team-data', 'TeamController@count'); 
+Route::get('team-dataa', 'TeamController@count'); //new routes
 
 
 // ATTENDANCE ROUTES
